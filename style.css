@@ -1,0 +1,42 @@
+.medieval {
+    font-family: 'MedievalSharp', cursive;
+    letter-spacing: 1px;
+}
+.garamond {
+    font-family: 'Cormorant Garamond', serif;
+}
+.montserrat {
+    font-family: 'Montserrat', sans-serif;
+}
+.burgundy-bg {
+    background-color: #42040a;
+}
+.gold-text {
+    color: #D4AF37;
+}
+.gold-border {
+    border-color: #D4AF37;
+}
+.hero-pattern {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://example.com/ethiopian-luxury-bg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.gallery-image {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.gallery-image:hover {
+    transform: scale(1.03);
+    opacity: 0.9;
+}
+.modal-transition {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.modal-enter {
+    opacity: 0;
+    transform: translateY(20px);
+}
+.modal-active {
+    opacity: 1;
+    transform: translateY(0);
+}
