@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natanem Couture | Ethiopian Luxury Fashion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#c5a47e',
+                        burgundy: '#5c0d26',
+                        darkBurgundy: '#3d0819',
+                        lightGold: '#f5f0eA',
+                        lightBurgundy: '#8a2a47',
+                        darkGray: '#1a1a1a',
+                        cream: '#f8f5f0'
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Montserrat', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.7s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-down': 'slideDown 0.8s ease-out',
+                        'zoom-in': 'zoomIn 0.6s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        zoomIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            overflow-x: hidden;
+        }
+        
+        .luxury-border {
+            position: relative;
+        }
+        
+        .luxury-border::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c5a47e, transparent);
+        }
+        
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.8));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        
+        .product-card:hover::before {
+            opacity: 1;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .hero-pattern {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('Img/landing_image3.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .nav-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .category-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #c5a47e;
+            transition: width 0.3s ease;
+        }
+        
+        .category-btn:hover::after,
+        .category-btn.active-category::after {
+            width: 100%;
+        }
+        
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gold-gradient {
+            background: linear-gradient(135deg, #c5a47e 0%, #e4c9a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-element-delay {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+        
+        .floating-element-delay-2 {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 4s;
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c5a47e, transparent);
+            margin: 4rem auto;
+            width: 80%;
+        }
+        
+        .embellishment {
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.03;
+            z-index: 0;
+            color: #c5a47e;
+        }
+        
+        .navbar-search-container {
+            display: flex;
+            align-items: center;
+            transition: width 0.3s ease-in-out;
+            width: 0;
+            overflow: hidden;
+            opacity: 0;
+        }
+        
+        .navbar-search-container.active {
+            width: 200px;
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-pattern {
+                background-attachment: scroll;
+            }
+            
+            .embellishment {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-cream font-sans overflow-x-hidden">
+    <!-- Navigation -->
+    <nav id="main-nav" class="fixed top-0 left-0 w-full z-50 py-4 transition-all duration-500">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="hidden lg:flex space-x-8">
+                <a href="#our-collections-section" class="font-serif font-medium text-lg hover:text-gold transition-all duration-300 relative luxury-border pb-1">NEW</a>
+                <a href="#our-collections-section" class="font-serif font-medium text-lg hover:text-gold transition-all duration-300 relative luxury-border pb-1">WOMEN</a>
+                <a href="#our-collections-section" class="font-serif font-medium text-lg hover:text-gold transition-all duration-300 relative luxury-border pb-1">MEN</a>
+                <a href="#our-collections-section" class="font-serif font-medium text-lg hover:text-gold transition-all duration-300 relative luxury-border pb-1">HATS</a>
+            </div>
+
+            <div class="text-center">
+                <h1 class="font-serif text-3xl gold-gradient tracking-widest">NATANEM COUTURE</h1>
+            </div>
+
+            <div class="hidden lg:flex space-x-6 items-center">
+                <div id="search-toggle-container" class="flex items-center">
+                    <div>
+                        <a href="#join-us" class="font-serif font-medium text-lg hover:text-gold transition-all duration-300 mr-4">JOIN US</a>
+                    </div>
+                    <span id="search-icon" class="search-icon cursor-pointer hover:text-gold transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        </svg>
+                    </span>
+                    <div id="navbar-search-container" class="navbar-search-container ml-2">
+                        <input type="text" id="navbar-search-input" class="navbar-search-input rounded-full px-4 py-2 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent" placeholder="Search products...">
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:hidden">
+                <button class="mobile-menu-button text-darkGray hover:text-gold transition-all duration-300">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-pattern text-white min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute top-10 left-10 floating-element">
+            <i class="fas fa-crown text-gold text-4xl opacity-30"></i>
+        </div>
+        <div class="absolute bottom-20 right-16 floating-element-delay">
+            <i class="fas fa-gem text-gold text-3xl opacity-30"></i>
+        </div>
+        <div class="absolute top-1/3 right-1/4 floating-element-delay-2">
+            <i class="fas fa-feather text-gold text-2xl opacity-30"></i>
+        </div>
+        
+        <div class="container mx-auto max-w-5xl px-6 text-center animate-slide-up">
+            <h2 class="font-serif text-5xl md:text-7xl mb-8 text-shadow gold-gradient">Royal Ethereal Elegance</h2>
+            <p class="font-serif text-2xl md:text-3xl mb-12 italic text-shadow">
+                "A modern ode to Ethiopia's royal heritage."
+            </p>
+            <a href="#our-collections-section" class="inline-block bg-transparent border-2 border-gold text-gold px-8 py-4 font-serif text-lg tracking-widest hover:bg-gold hover:text-white transition-all duration-500 transform hover:scale-105">
+                EXPLORE COLLECTIONS
+            </a>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-gold text-2xl">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white relative overflow-hidden">
+        <div class="embellishment top-10 left-10">
+            <i class="fas fa-crown"></i>
+        </div>
+        <div class="embellishment bottom-10 right-10">
+            <i class="fas fa-palette"></i>
+        </div>
+        
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16 scroll-reveal"> 
+                <h2 class="font-serif text-4xl text-center mb-4 gold-gradient">ABOUT NATANEM COUTURE</h2>
+                <div class="w-24 h-1 bg-gold mx-auto"></div>
+            </div>
+
+            <div class="flex flex-col lg:flex-row items-center lg:items-start text-left scroll-reveal">
+                <div class="w-full lg:w-1/2 pr-0 lg:pr-12 mb-12 lg:mb-0 transform hover:scale-105 transition-transform duration-500">
+                    <div class="overflow-hidden rounded-lg shadow-2xl">
+                        <img src="Img/about.jpg" alt="Natanem Wondwosen" class="w-full h-auto object-cover transition-transform duration-700 hover:scale-110">
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <p class="font-sans text-lg leading-relaxed mb-6 text-darkGray">Natanem Wondwosen is a young and enthusiastic Ethiopian designer who is making significant strides both within Ethiopia and on the international stage. Driven by her passion and creative mind, she has dedicated her time and effort to creating impactful designs. Her work reflects a commitment to innovation and a desire to showcase Ethiopian talent and artistry to a wider audience.</p>
+
+                    <p class="font-sans text-lg leading-relaxed mb-8 text-darkGray">Natanem aims to not only elevate the design landscape in Ethiopia but also to establish a strong presence globally. Her dedication to her craft and her enthusiastic approach are evident in the quality and originality of her creations, positioning her as a promising force in the design world.</p>
+                    
+                    <div class="flex space-x-4">
+                        <a href="#our-collections-section" class="bg-burgundy text-white px-6 py-3 font-serif hover:bg-darkBurgundy transition-all duration-300 transform hover:scale-105">
+                            VIEW COLLECTIONS
+                        </a>
+                        <a href="#publications" class="border border-burgundy text-burgundy px-6 py-3 font-serif hover:bg-burgundy hover:text-white transition-all duration-300 transform hover:scale-105">
+                            MEDIA FEATURES
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <div class="section-divider"></div>
+
+    <!-- Collections Section -->
+    <section id="our-collections-section" class="py-20 px-6 bg-cream relative overflow-hidden">
+        <div class="embellishment top-20 left-1/4">
+            <i class="fas fa-gem"></i>
+        </div>
+        <div class="embellishment bottom-20 right-1/4">
+            <i class="fas fa-feather-alt"></i>
+        </div>
+        
+        <div class="container mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h3 class="font-serif text-4xl mb-4 gold-gradient">OUR COLLECTIONS</h3>
+                <p class="font-sans text-lg text-darkGray max-w-2xl mx-auto">Discover our exclusive collections that blend Ethiopian heritage with contemporary luxury fashion.</p>
+                <div class="w-24 h-1 bg-gold mx-auto mt-6"></div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 mb-16 scroll-reveal">
+                <button class="category-btn bg-burgundy text-white px-8 py-3 font-serif text-lg hover:opacity-90 transition-all duration-300 active-category transform hover:scale-105" data-category="new">NEW ARRIVALS</button>
+                <button class="category-btn bg-burgundy text-white px-8 py-3 font-serif text-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105" data-category="men">MEN'S COLLECTION</button>
+                <button class="category-btn bg-burgundy text-white px-8 py-3 font-serif text-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105" data-category="women">WOMEN'S COLLECTION</button>
+                <button class="category-btn bg-burgundy text-white px-8 py-3 font-serif text-lg hover:opacity-90 transition-all duration-300 transform hover:scale-105" data-category="hats">LUXURY HATS</button>
+            </div>
+
+            <div id="category-products" class="scroll-reveal">
+                <div id="new-products" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="elegance dress women new">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/men1.jpg" alt="Elegance Dress" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Elegance Dress</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Elegance Dress is a timeless piece that combines grace and style. combines grace and style.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="modern tunic women new">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/hat1.jpg" alt="Modern Tunic" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Modern Tunic</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Modern Tunic features a sleek design blending comfort with contemporary fashion.combines grace and style. </p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="journal leather new accessory">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/women1.jpg" alt="Hand-tooled Leather Journal" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Hand-tooled Leather Journal</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Hand-tooled Leather Journal showcases intricate craftsmanship with detailed, embossed designs.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="blouse silk contemporary women new">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/men2.jpg" alt="Contemporary Silk Blouse" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Contemporary Silk Blouse</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Contemporary Silk Blouse offers a smooth, elegant look with a modern touch. combines grace and style.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="belt leather minimalist men new accessory">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/hat2.jpg" alt="Minimalist Leather Belt" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Minimalist Leather Belt</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Minimalist Leather Belt is a sleek accessory designed for everyday style. blending comfort with style</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="ring artisan jewelry new accessory women men">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/women2.jpg" alt="Artisan Crafted Ring" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Artisan Crafted Ring</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Artisan Crafted Ring features unique handmade details for a distinctive look exploition tradition.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    
+                     <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="coffee set ethiopian modern new home">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/men3.jpg" alt="Modern Ethiopian Coffee Set" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Modern Ethiopian Coffee Set</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Modern Ethiopian Coffee Set combines traditional brewing with stylish design.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="blanket woven throw new home">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/hat3.jpg" alt="Hand-Woven Throw Blanket" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Hand-Woven Throw Blanket</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Hand-Woven Throw Blanket adds warmth and texture with artisanal craftsmanship.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                     <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="leather wallet new accessory men women">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/women3.jpg" alt="Minimalist Leather Wallet" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Minimalist Leather Wallet</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Minimalist Leather Wallet offers simple elegance with practical design exploring tradition.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="men-products" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 hidden">
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="shirt traditional men">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/men1.jpg" alt="Men's Traditional Shirt" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Men's Traditional Shirt</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Men's Traditional Shirt blends cultural heritage with classic style.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="vest leather men">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/men2.jpg" alt="Men's Leather Vest" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Men's Leather Vest</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Men's Leather Vest combines rugged durability with timeless fashion.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="tote leather men bag accessory">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/men3.jpg" alt="Handcrafted Leather Tote" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Men's Leather Tote</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Men's Leather Tote is a sturdy and stylish bag for everyday use.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="cotton shirt ethiopian men">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/men4.jpg" alt="Ethiopian Cotton Shirt" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Ethiopian Cotton Shirt</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Ethiopian Cotton Shirt features breathable fabric with traditional design elements.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="scarf hand-woven men accessory">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/men5.jpg" alt="Hand-woven Scarf" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Hand-woven Scarf</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Hand-woven Scarf showcases artisanal craftsmanship with natural fibers.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="backpack leather men bag accessory">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/men1.jpg" alt="Men's Leather Backpack" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Men's Leather Backpack</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Men's Leather Backpack offers durable, stylish storage for daily essentials.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="women-products" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 hidden">
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="dress embroidered women">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/women1.jpg" alt="Women's Embroidered Dress" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Women's Embroidered Dress</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Women's Embroidered Dress features intricate stitching artistry.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="scarf silk women accessory">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/women5.jpg" alt="Women's Silk Scarf" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Women's Silk Scarf</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Women's Silk Scarf adds a touch of luxury with its smooth, elegant fabric.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="wallet ethiopian traditional women accessory">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/women4.jpg" alt="Traditional Ethiopian Wallet" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Traditional Ethiopian Wallet</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Traditional Ethiopian Wallet blends cultural patterns with practical design.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="blouse ethiopian modern women">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/women3.jpg" alt="Modern Ethiopian Blouse" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Modern Ethiopian Blouse</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Modern Ethiopian Blouse combines contemporary style with tradition.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="jewelry set statement women accessory">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/women2.jpg" alt="Statement Jewelry Set" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Statement Jewelry Set</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Statement Jewelry Set features bold designs that capture attention instantly.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                     <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="clutch bag embroidered women accessory">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/women1.jpg" alt="Embroidered Clutch Bag" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Embroidered Clutch Bag</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">The Embroidered Clutch Bag showcases detailed needlework for a stylish accent.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="hats-products" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 hidden">
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="straw hat traditional men women">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/hat5.jpg" alt="Traditional Straw Hat" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Traditional Straw Hat</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">A classic straw hat blending tradition and style for men and women.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="cap embroidered men women">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/hat1.jpg" alt="Embroidered Cap" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Embroidered Cap</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">A stylish embroidered cap perfect for all genders.combines grace and style.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="fedora leather men women">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/hat2.jpg" alt="Leather Fedora" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Leather Fedora</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">Elegant leather fedora combining timeless design with modern flair.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="sun hat woven women men">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/hat3.jpg" alt="Woven Sun Hat" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Woven Sun Hat</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">Lightweight woven sun hat offering both sun protection and fashion.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                     <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="felted wool hat men women">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/hat4.jpg" alt="Felted Wool Hat" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Felted Wool Hat</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">Cozy felted wool hat crafted for warmth and comfort</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden product-card rounded-lg" data-keywords="safari style hat men women">
+                        <div class="product-image-container h-80 overflow-hidden">
+                            <img src="Img/hat5.jpg" alt="Safari Style Hat" class="product-image w-full h-full object-cover">
+                        </div>
+                        <div class="product-info absolute bottom-0 left-0 right-0 p-6 z-10 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+                            <h4 class="font-serif text-2xl product-name text-white mb-2">Safari Style Hat</h4>
+                            <p class="font-sans text-sm product-price text-gold mb-4">Versatile safari style hat designed for adventure and everyday wear.</p>
+                            <button class="add-to-cart-btn bg-gold text-burgundy px-4 py-2 font-serif text-sm tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 w-full">
+                                ADD TO CART
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 scroll-reveal">
+                <button id="main-load-more-btn" class="load-more-btn bg-burgundy text-gold px-8 py-4 font-serif text-lg tracking-wider hover:bg-darkBurgundy hover:text-white transition-all duration-300 transform hover:scale-105 hidden">
+                    LOAD MORE
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Artisan Craftsmanship Section -->
+    <section class="py-20 px-6 bg-white relative overflow-hidden">
+        <div class="embellishment top-10 right-20">
+            <i class="fas fa-paint-brush"></i>
+        </div>
+        
+        <div class="container mx-auto max-w-7xl">
+            <div class="text-center mb-16 scroll-reveal">
+                <h3 class="font-serif text-4xl mb-4 gold-gradient">ARTISAN CRAFTSMANSHIP</h3>
+                <div class="w-24 h-1 bg-gold mx-auto"></div>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row items-center gap-16 mb-16 scroll-reveal">
+                <div class="lg:w-1/2 grid grid-cols-2 gap-6">
+                    <div class="group relative overflow-hidden h-80 rounded-lg transform hover:scale-105 transition-transform duration-500">
+                        <img src="https://www.shutterstock.com/shutterstock/videos/1008687769/thumb/1.jpg" 
+                            alt="Ethiopian textile weaving" 
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <p class="text-white font-serif text-xl px-4 text-center">Handwoven Textiles</p>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden h-80 rounded-lg transform hover:scale-105 transition-transform duration-500">
+                        <img src="Img/crafts2.jpg" 
+                            alt="Leather craftsmanship" 
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <p class="text-white font-serif text-xl px-4 text-center">Leather Craft</p>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden h-80 rounded-lg transform hover:scale-105 transition-transform duration-500">
+                        <img src="Img/crafts3.jpg" 
+                            alt="Silver jewelry making" 
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <p class="text-white font-serif text-xl px-4 text-center">Silver Jewelry</p>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden h-80 rounded-lg transform hover:scale-105 transition-transform duration-500">
+                        <img src="Img/crafts4.jpg" 
+                            alt="Embroidery detail" 
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <p class="text-white font-serif text-xl px-4 text-center">Embroidery Work</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 scroll-reveal">
+                    <h3 class="font-serif text-4xl mb-6 gold-gradient">CRAFTED IN ETHIOPIA</h3>
+                    <p class="font-sans mb-6 text-lg leading-relaxed text-darkGray">
+                        Every Natanem Couture piece is handcrafted by master artisans in Addis Ababa, 
+                        blending centuries-old techniques with contemporary luxury. Our atelier works with 
+                        Ethiopia's most skilled craftspeople to create wearable art.
+                    </p>
+                    <p class="font-sans mb-8 text-lg leading-relaxed text-darkGray">
+                        From hand-spun cotton to naturally dyed silks and ethically sourced leather, 
+                        each material tells a story of Ethiopian heritage while meeting the highest 
+                        standards of modern luxury fashion.
+                    </p>
+                    <a href="#our-collections-section" class="inline-block bg-burgundy text-white px-8 py-3 font-serif text-lg tracking-wider hover:bg-darkBurgundy transition-all duration-300 transform hover:scale-105">
+                        DISCOVER CRAFTSMANSHIP
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Events Section -->
+    <section class="py-20 px-6 bg-cream" id="events">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h3 class="font-serif text-4xl mb-4 gold-gradient">OUR EVENTS</h3>
+                <p class="font-sans text-lg text-darkGray max-w-2xl mx-auto">Experience the world of Natanem Couture through our exclusive fashion events and showcases.</p>
+                <div class="w-24 h-1 bg-gold mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="events-container">
+                <!-- Events will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Modal -->
+    <div id="galleryModal" class="fixed inset-0 modal-overlay z-50 hidden overflow-y-auto transition-opacity duration-500">
+        <div class="container mx-auto py-12 px-4 relative min-h-screen">
+            <button id="closeGallery" class="absolute top-8 right-8 text-white text-3xl z-10 hover:text-gold transition-colors duration-300">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="max-w-6xl mx-auto animate-zoom-in">
+                <div class="text-center mb-12">
+                    <h2 id="galleryTitle" class="text-4xl md:text-5xl font-bold text-gold mb-4 font-serif"></h2>
+                    <p id="galleryDate" class="text-lightGold text-lg"></p>
+                    <div id="galleryLocation" class="text-lightGold mb-6 text-lg"></div>
+                    <div class="w-24 h-1 bg-gold mx-auto"></div>
+                </div>
+                
+                <div id="galleryDescription" class="max-w-3xl mx-auto text-center text-lightGold mb-12 px-4 font-sans leading-relaxed text-lg"></div>
+                
+                <div class="flex justify-center mb-10">
+                    <div class="flex space-x-2 bg-darkGray bg-opacity-50 p-2 rounded-full">
+                        <button class="event-nav-btn px-6 py-2 text-sm rounded-full transition-all duration-300" data-event="1">Hub of Africa Addis</button>
+                        <button class="event-nav-btn px-6 py-2 text-sm rounded-full transition-all duration-300" data-event="2">Upcoming Event</button>
+                    </div>
+                </div>
+                
+                <div id="galleryContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <!-- Publications Section -->
+    <section id="publications" class="py-20 bg-white px-6">
+        <div class="container mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <h2 class="font-serif text-4xl mb-4 gold-gradient">Publications</h2>
+                <p class="font-sans text-lg text-darkGray max-w-2xl mx-auto">Discover Natanem Couture through featured articles, interviews, and media appearances.</p>
+                <div class="w-24 h-1 bg-gold mx-auto mt-6"></div>
+            </div>
+            
+            <div class="flex justify-center mb-12 border-b border-gold">
+                <div class="flex space-x-1 bg-cream p-2 rounded-full">
+                    <button class="tab-btn active px-8 py-3 font-medium text-burgundy rounded-full transition-all duration-300 transform hover:scale-105" data-tab="articles">Articles</button>
+                    <button class="tab-btn px-8 py-3 font-medium text-burgundy hover:text-burgundy/80 rounded-full transition-all duration-300 transform hover:scale-105" data-tab="youtube">YouTube</button>
+                    <button class="tab-btn px-8 py-3 font-medium text-burgundy hover:text-burgundy/80 rounded-full transition-all duration-300 transform hover:scale-105" data-tab="instagram">Instagram</button>
+                </div>
+            </div>
+            
+            <div class="tab-content active animate-fade-in" id="articles-tab">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="articles-container">
+                    <!-- Articles will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="tab-content hidden animate-fade-in" id="youtube-tab">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="youtube-container">
+                    <!-- YouTube content will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="tab-content hidden animate-fade-in" id="instagram-tab">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="instagram-container">
+                    <!-- Instagram content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Newsletter Section -->
+    <section class="py-20 px-6 bg-burgundy text-white text-center relative overflow-hidden" id="join-us">
+        <div class="embellishment top-10 left-10 text-white opacity-10">
+            <i class="fas fa-crown"></i>
+        </div>
+        <div class="embellishment bottom-10 right-10 text-white opacity-10">
+            <i class="fas fa-gem"></i>
+        </div>
+        
+        <div class="container mx-auto max-w-3xl relative z-10 scroll-reveal">
+            <h3 class="font-serif text-4xl mb-6 gold-gradient">JOIN THE NATANEM WORLD</h3>
+            <p class="font-sans mb-10 text-xl max-w-2xl mx-auto">
+                Receive exclusive access to new collections, private events, and Ethiopian luxury insights.
+            </p>
+            <form class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <input type="email" placeholder="Your email address" class="flex-grow max-w-md px-6 py-4 font-sans text-darkGray rounded-full focus:outline-none focus:ring-2 focus:ring-gold">
+                <button type="submit" class="bg-gold text-burgundy px-8 py-4 font-serif text-lg tracking-wider rounded-full hover:bg-white transition-all duration-300 transform hover:scale-105">
+                    SUBSCRIBE
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darkGray text-white py-16 px-6">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="md:col-span-2">
+                <h4 class="font-serif text-2xl mb-6 gold-gradient">NATANEM COUTURE</h4>
+                <p class="font-sans text-gray-700 max-w-md">
+                    Ethiopian luxury fashion redefined through heritage craftsmanship and contemporary elegance.
+                </p>
+                <div class="flex space-x-6 mt-6">
+                    <a href="#" class="text-gray-700 hover:text-gold transition-colors duration-300 text-xl">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-700 hover:text-gold transition-colors duration-300 text-xl">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-700 hover:text-gold transition-colors duration-300 text-xl">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-700 hover:text-gold transition-colors duration-300 text-xl">
+                        <i class="fab fa-pinterest-p"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-serif font-bold mb-6 text-lg">QUICK LINKS</h4>
+                <ul class="space-y-3">
+                    <li><a href="#our-collections-section" class="text-gray-700 hover:text-gold transition-colors duration-300 font-sans">Collections</a></li>
+                    <li><a href="#about" class="text-gray-700 hover:text-gold transition-colors duration-300 font-sans">About</a></li>
+                    <li><a href="#events" class="text-gray-700 hover:text-gold transition-colors duration-300 font-sans">Events</a></li>
+                    <li><a href="#publications" class="text-gray-700 hover:text-gold transition-colors duration-300 font-sans">Media</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-serif font-bold mb-6 text-lg">CONTACT</h4>
+                <p class="text-gray-700 font-sans mb-2">Addis Ababa, Ethiopia</p>
+                <p class="text-gray-700 font-sans mb-2">client@natanemcouture.com</p>
+                <p class="text-gray-700 font-sans mb-2">+251 925 002 947</p>
+                <div class="mt-6">
+                    <h5 class="font-serif text-gold mb-2">Business Hours</h5>
+                    <p class="text-gray-700 font-sans text-sm">Mon - Fri: 9AM - 6PM</p>
+                    <p class="text-gray-700 font-sans text-sm">Sat: 10AM - 4PM</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-800 mt-16 pt-8 text-center">
+            <p class="font-sans text-gray-700 text-sm">© 2025 NATANEM COUTURE. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // All the JavaScript from the original code remains the same
+        // Including publications data, events data, gallery data, and functionality
+        
+        // Publications data
+        const publications = {
+            webArticles: [
+                {
+                    title: "Reporters",
+                    excerpt: "Natanem, owner of Natanem's Couture, is a multi-facetted fashion designer who has recently joined the fashion industry with a bold and memorable debut. The designer has a unique style of assembling clothes that manage to combine culture, structure and contemporary looks.",
+                    url: "https://www.thereporterethiopia.com/23862/",
+                    image: "Img/about.jpg",
+                    badge: "Featured"
+                },
+                {
+                    title: "Capital Magazine",
+                    excerpt: "Custom-made and ready to wear clothing",
+                    url: "https://capitalethiopia.com/2024/09/17/natanem-wondwossen/?amp=1",
+                    image: "https://images.unsplash.com/photo-1455849318743-b2233052fcff?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "Shega",
+                    excerpt: "Natanem designs and manufactures fashionable wear to meet specific requirements. Every cloth is made with carefully selected garments and authentic storytelling embroidery.",
+                    url: "https://shega.co/news/ethiopias-fashion-entrepreneurs-get-a-boost-from-creative-dna-initiative",
+                    image: "Img/shega.jpg",
+                    badge: "Exclusive"
+                },
+                {
+                    title: "Tadias Magazine",
+                    excerpt: "Addis Ababa's Runway to Cultural Nexus: HAFW 2024 Shaping the Global Fashion Scene",
+                    url: "http://www.tadias.com/02/02/2024/addis-ababas-runway-to-cultural-nexus-hafw-2024-shaping-the-global-fashion-scene/",
+                    image: "https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "Vogue",
+                    excerpt: "Cultural heritage meets modern design",
+                    url: "https://www.vogue.com/article/10-designers-addis-ababa-hub-of-africa-fashion-week",
+                    image: "https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "Fashion Scout",
+                    excerpt: "Natanem Couture is where elegance meets style.",
+                    url: "https://fashionscout.com/page-1-creative-dna-eth-1-1-1-1-1-1",
+                    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                }
+            ],
+            instagram: [
+                {
+                    title: "Miss World",
+                    excerpt: "Telangana, where dreams are crowned by Natanem Couture",
+                    url: "https://www.instagram.com/p/DKaOtA6sBIR/?igsh=MWY0aGx2bXp1MG5iaA%3D%3D",
+                    image: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "Miss Earth",
+                    excerpt: "natanem_couture inspired to show our unique flower the Adey ababa only found in Ethiopia for the national costume competition",
+                    url: "https://www.instagram.com/reel/C09xbKtvZGE/?igsh=bXB2b3JnYmd4ejJj",
+                    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "Guzang",
+                    excerpt: "Ethiopian based Natanem Couture's capsule collection-Where Elegance Meets Style",
+                    url: "https://www.instagram.com/p/CzolI4YOOvV/?img_index=1&igsh=MXg3YmV5aG9ybGYyaA%3D%3D",
+                    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "Hub of Africa",
+                    excerpt: "CDNA program this brand Brought amazing pieces @natanem_couture giving a new perspective on demure fashion ",
+                    url: "https://www.instagram.com/p/C2P2I3Ao-qj/?igsh=MWwxOHhjdnVkbm5taw%3D%3D",
+                    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "British Council",
+                    excerpt: "Meet Creative DNA: Ethiopia designer Natanem Wondwossen, the mind behind the custom fashion brand ",
+                    url: "https://www.instagram.com/reel/CxSTZkVIWC6/?igsh=eTc4am1nOWd6bDJn",
+                    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "AFRICAN MONIQUE",
+                    excerpt: "Our next High Tea x Fashion event is just 4 days away!",
+                    url: "https://www.instagram.com/p/CzEY8GJIR0y/?igsh=MXhlZWJpdzg2N2p0Ng%3D%3D",
+                    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "FASHION PHENOMENALS",
+                    excerpt: "A night to remember. Where we took music and fashion experience to the next level. ",
+                    url: "https://www.instagram.com/tv/Ce9I_egoHjt/?igsh=MWRxZ29sdXphejF4Yw%3D%3D",
+                    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "ALLIANCE ETHIOFRANCIES",
+                    excerpt: "Natanem is a young and enthusiastic Ethiopian designer born and raised in Addis Ababa, who is working to make an impact in Ethiopia and abroad with her unique and elegant style. ",
+                    url: "https://www.instagram.com/p/CZKF1d-qWUl/?igsh=am1vYmRjeWk4MzVu",
+                    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "BAF",
+                    excerpt: "Natanem Couture from Ethiopia will be one of our presenting brands during this Thursday's Media Equity event.",
+                    url: "https://www.instagram.com/p/C3SzC4II-iA/?igsh=Z210eGYzbWg3emNk",
+                    image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+            ],
+            youtube: [
+                {
+                    title: "HABESHA BEER",
+                    url: "https://www.youtube.com/watch?v=R383p9u347A",
+                    image: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "DINK TV",
+                    excerpt: "Natanem interview at Techno Event",
+                    url: "https://youtu.be/ByDCL5oyDqo",
+                    image: "https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "FENDISHA ENTERTAINMENT",
+                    excerpt: "Interview with our creative director",
+                    url: "https://www.youtube.com/watch?v=designer-interview",
+                    image: "https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "EBS",
+                    excerpt: "Natanem Interview on EBS TV",
+                    url: "https://youtu.be/PjqN9dwKXAg?si=RnFu0z7MtwgE-AOM",
+                    image: "https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "Design + thought prodcast",
+                    excerpt: "Natanem Interview in Design + Thought Podcast",
+                    url: "https://youtu.be/mjQ7o34dTXs",
+                    image: "https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                },
+                {
+                    title: "Nesant",
+                    excerpt: "Natanem Interview in Nesant Podcast",
+                    url: "https://youtu.be/UzPE2tp1mi8?si=sAq9gsu9jotIKpNx",
+                    image: "https://images.unsplash.com/photo-1579389083078-4e7018379f7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                }
+            ]
+        };
+
+        // Function to create publication card
+        function createPublicationCard(pub, showPlatformIcon = false) {
+            return `
+                <div class="burgundy-bg text-white shadow-lg overflow-hidden transform hover:scale-[1.02] transition-transform duration-300 rounded-lg">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="${pub.image}" alt="${pub.title}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        ${pub.badge ? `<div class="absolute ${pub.badge === 'Exclusive' ? 'top-4 right-4' : 'bottom-4 left-4'}">
+                            <span class="${pub.badge === 'Exclusive' ? 'bg-burgundy text-white' : 'bg-gold text-burgundy'} px-2 py-1 text-xs font-bold">${pub.badge}</span>
+                        </div>` : ''}
+                        ${showPlatformIcon ? `
+                        <div class="absolute top-4 left-4 bg-black bg-opacity-70 rounded-full p-2">
+                            <i class="${pub.platform === 'instagram' ? 'fab fa-instagram' : 'fab fa-youtube'} text-white"></i>
+                        </div>` : ''}
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gold mb-2 font-serif">${pub.title}</h3>
+                        <p class="text-burgundy mb-4">"${pub.excerpt}"</p>
+                        <a href="${pub.url}" target="_blank" class="inline-flex items-center text-gold hover:text-burgundy font-medium">
+                            ${pub.platform === 'youtube' ? 'Watch Video' : pub.platform === 'instagram' ? 'View Post' : 'Read Article'}
+                            <i class="fas fa-external-link-alt ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Events data
+        const eventsData = {
+            "events": [
+            {
+                "id": 1,
+                "title": "Hub of africa addis",
+                "date": "January 28, 2024",
+                "description": "These moments celebrate our fusion of tradition and modernity, bringing cultural storytelling to life.",
+                "location": "African Fashion Center",
+                "image": "https://images.unsplash.com/photo-1523359346063-d879354c0ea5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            },
+            {
+                "id": 2,
+                "title": "Upcoming Event",
+                "date": "November 5-7, 2025",
+                "description": "Private viewing of our latest collection at the historic Hôtel de Crillon with the designer present.",
+                "location": "Addis Ababa",
+                "image": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                "id": 3,
+                "title": "Upcoming Event",
+                "date": "March 15-17, 2025",
+                "description": "Private viewing of our latest collection at the historic Hôtel de Crillon with the designer present.",
+                "location": "Federal Palace Hotel, Lagos",
+                "image": "https://images.unsplash.com/photo-1492707892479-7bc8d5a4ee93?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+            }
+            ]
+        };
+
+        // Gallery data
+        const galleryData = {
+            1: {
+                title: "Hub of africa addis",
+                date: "January 28, 2024",
+                location: "African Fashion Center",
+                description: "Natanem Couture made a stunning debut at the prestigious Hub of Africa Addis fashion week, showcasing our 'Heritage Reimagined' collection. The runway presentation featured 25 looks that blended traditional Ethiopian textiles with contemporary silhouettes, earning standing ovations from the international fashion press in attendance. Our designer was honored with the 'Emerging Talent' award for this groundbreaking collection that paid homage to Ethiopian craftsmanship while pushing the boundaries of modern African fashion.",
+                images: [
+                    "Img/runwayImg1.jpg",
+                    "Img/runwayImg2.jpg",
+                    "Img/runwayImg3.jpg",
+                    "Img/runwayImg4.jpg",
+                    "Img/runwayImg5.jpg",
+                    "Img/runwayImg6.jpg",
+                    "Img/runwayImg7.jpg",
+                    "Img/runwayImg8.jpg",
+                    "Img/runwayImg9.jpg",
+                    "Img/runwayImg10.jpg",
+                    "Img/runwayImg11.jpg",
+                    "Img/runwayImg12.jpg",
+                    "Img/runwayImg13.jpg",
+                    "Img/runwayImg14.jpg",
+                    "Img/runwayImg15.jpg",
+                    "Img/runwayImg16.jpg",
+                    "Img/runwayImg17.jpg",
+                    "Img/runwayImg18.jpg",
+                ]
+            },
+            2: {
+                title: "Upcoming Event",
+                date: "November 5-7, 2025",
+                location: "Addis Ababa",
+                description: "We're thrilled to announce our upcoming exclusive event in Addis Ababa this November. This invite-only presentation will unveil our Spring/Summer 2026 collection 'Echoes of the Nile', featuring innovative fabric treatments developed in collaboration with Ethiopian textile artisans. The three-day event will include a runway show, private appointments with our design team, and an exhibition of the traditional craftsmanship techniques that inspire our work. Limited spaces available for VIP clients and press.",
+                images: [
+                    "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1479064555552-3ef4979f8908?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1496747611176-843222e1e57c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1483982258113-b72862e6cff6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ]
+            }
+        };
+
+        // Additional scroll animation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Scroll reveal animation
+            const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+            
+            const scrollReveal = function() {
+                scrollRevealElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('revealed');
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', scrollReveal);
+            scrollReveal(); // Check on load
+            
+            // Navbar scroll effect
+            const nav = document.getElementById('main-nav');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    nav.classList.add('nav-scrolled');
+                } else {
+                    nav.classList.remove('nav-scrolled');
+                }
+            });
+            
+            // Mobile menu functionality
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            mobileMenuButton.addEventListener('click', function() {
+                // Create mobile menu overlay if it doesn't exist
+                let mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu) {
+                    mobileMenu = document.createElement('div');
+                    mobileMenu.id = 'mobile-menu';
+                    mobileMenu.className = 'fixed inset-0 bg-white z-50 flex flex-col items-center justify-center lg:hidden';
+                    mobileMenu.innerHTML = `
+                        <button class="absolute top-6 right-6 text-3xl text-darkGray">
+                            <i class="fas fa-times"></i>
+                        </button>
+                        <div class="flex flex-col space-y-8 text-center">
+                            <a href="#our-collections-section" class="font-serif text-2xl text-darkGray hover:text-gold transition-colors duration-300">NEW</a>
+                            <a href="#our-collections-section" class="font-serif text-2xl text-darkGray hover:text-gold transition-colors duration-300">WOMEN</a>
+                            <a href="#our-collections-section" class="font-serif text-2xl text-darkGray hover:text-gold transition-colors duration-300">MEN</a>
+                            <a href="#our-collections-section" class="font-serif text-2xl text-darkGray hover:text-gold transition-colors duration-300">HATS</a>
+                            <a href="#join-us" class="font-serif text-2xl text-darkGray hover:text-gold transition-colors duration-300">JOIN US</a>
+                        </div>
+                    `;
+                    document.body.appendChild(mobileMenu);
+                    
+                    // Close mobile menu
+                    mobileMenu.querySelector('button').addEventListener('click', function() {
+                        mobileMenu.remove();
+                    });
+                }
+            });
+
+            // Initialize publications when DOM is loaded
+            // Add platform info to each publication
+            publications.webArticles.forEach(pub => pub.platform = 'web');
+            publications.instagram.forEach(pub => pub.platform = 'instagram');
+            publications.youtube.forEach(pub => pub.platform = 'youtube');
+            
+            // Load all web articles
+            const articlesContainer = document.getElementById('articles-container');
+            publications.webArticles.forEach(pub => {
+                articlesContainer.innerHTML += createPublicationCard(pub);
+            });
+            
+            // Load all Instagram posts
+            const instagramContainer = document.getElementById('instagram-container');
+            publications.instagram.forEach(pub => {
+                instagramContainer.innerHTML += createPublicationCard(pub, true);
+            });
+            
+            // Load all YouTube videos
+            const youtubeContainer = document.getElementById('youtube-container');
+            publications.youtube.forEach(pub => {
+                youtubeContainer.innerHTML += createPublicationCard(pub, true);
+            });
+            
+            // Tab functionality
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons and tabs
+                    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active', 'border-b-2', 'border-burgundy'));
+                    document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active', 'border-b-2', 'border-burgundy');
+                    
+                    // Show corresponding tab
+                    const tabId = this.getAttribute('data-tab') + '-tab';
+                    document.getElementById(tabId).classList.remove('hidden');
+                });
+            });
+
+            // Events functionality
+            const eventsContainer = document.getElementById('events-container');
+
+            eventsData.events.forEach(event => {
+                const eventCard = document.createElement('div');
+                eventCard.className = 'bg-white shadow-lg overflow-hidden transform hover:scale-[1.02] transition-transform duration-300 cursor-pointer event-card rounded-lg';
+                eventCard.setAttribute('data-event', event.id);
+
+                eventCard.innerHTML = `
+                <div class="relative h-64 overflow-hidden">
+                    <img src="${event.image}" alt="${event.title}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center text-gold mb-2">
+                    <i class="far fa-calendar-alt mr-2"></i>
+                    <span>${event.date}</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-burgundy mb-2 font-serif">${event.title}</h3>
+                    <p class="text-gray-600 mb-4">${event.description}</p>
+                    <div class="flex justify-between items-center">
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-map-marker-alt mr-1"></i>
+                        <span>${event.location}</span>
+                    </div>
+                    <a href="#" class="text-gold hover:text-burgundy font-medium">View Gallery</a>
+                    </div>
+                </div>
+                `;
+
+                eventsContainer.appendChild(eventCard);
+            });
+
+            // Gallery functionality
+            const galleryModal = document.getElementById('galleryModal');
+            const closeGalleryBtn = document.getElementById('closeGallery');
+            const eventCards = document.querySelectorAll('.event-card');
+            const eventNavBtns = document.querySelectorAll('.event-nav-btn');
+            
+            // Function to load gallery data
+            function loadGallery(eventId) {
+                const eventData = galleryData[eventId];
+                if (!eventData) return;
+                
+                // Update modal header
+                document.getElementById('galleryTitle').textContent = eventData.title;
+                document.getElementById('galleryDate').textContent = eventData.date;
+                document.getElementById('galleryLocation').textContent = eventData.location;
+                document.getElementById('galleryDescription').textContent = eventData.description;
+                
+                // Load images
+                const galleryContainer = document.getElementById('galleryContainer');
+                galleryContainer.innerHTML = '';
+                
+                eventData.images.forEach(imageUrl => {
+                    galleryContainer.innerHTML += `
+                        <div class="relative group overflow-hidden rounded-lg">
+                            <img src="${imageUrl}" alt="${eventData.title}" class="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                <span class="font-serif text-3xl text-center mb-12 gold-text">${eventData.title}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                // Update active nav button
+                eventNavBtns.forEach(btn => {
+                    btn.classList.toggle('bg-gold', btn.dataset.event === eventId);
+                    btn.classList.toggle('text-burgundy', btn.dataset.event === eventId);
+                    btn.classList.toggle('text-lightGold', btn.dataset.event !== eventId);
+                });
+            }
+            
+            // Event card click handlers
+            eventCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const eventId = this.dataset.event;
+                    loadGallery(eventId);
+                    galleryModal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Gallery navigation click handlers
+            eventNavBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const eventId = this.dataset.event;
+                    loadGallery(eventId);
+                });
+            });
+            
+            // Close gallery handler
+            closeGalleryBtn.addEventListener('click', function() {
+                galleryModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close when clicking outside content
+            galleryModal.addEventListener('click', function(e) {
+                if (e.target === galleryModal) {
+                    galleryModal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            // Product category functionality
+            const productsPerLoad = 6; // Number of products to show initially and load more
+            let displayedProductCounts = {}; // To keep track of how many products are currently shown per category
+            let activeCategory = 'new'; // Keep track of the currently active category
+
+            // DOM elements
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const productGrids = document.querySelectorAll('#category-products > div[id$="-products"]');
+            const mainLoadMoreBtn = document.getElementById('main-load-more-btn');
+            const searchIcon = document.getElementById('search-icon');
+            const navbarSearchContainer = document.getElementById('navbar-search-container');
+            const navbarSearchInput = document.getElementById('navbar-search-input');
+            const collectionsSection = document.getElementById('our-collections-section'); // Select the "OUR COLLECTIONS" section
+
+            // --- Helper Functions ---
+
+            /**
+             * Initializes the display for a given category grid:
+             * Hides all products, then shows the first 'productsPerLoad' items.
+             * Updates displayedProductCounts for the category.
+             * Manages the visibility of the main "Load More" button.
+             * @param {HTMLElement} categoryGrid - The div element containing products for a category.
+             */
+            function initializeCategoryDisplay(categoryGrid) {
+                const category = categoryGrid.id.replace('-products', '');
+                const cards = Array.from(categoryGrid.querySelectorAll('.product-card'));
+
+                cards.forEach(card => card.style.display = 'none'); // Hide all
+
+                const initialCount = Math.min(cards.length, productsPerLoad);
+                for (let i = 0; i < initialCount; i++) {
+                    cards[i].style.display = 'block';
+                }
+                displayedProductCounts[category] = initialCount;
+
+                // Update main load more button state
+                updateLoadMoreButton(category, cards.length);
+            }
+
+            /**
+             * Updates the visibility and data-category of the single main-load-more-btn.
+             * @param {string} category - The category currently being displayed.
+             * @param {number} totalProducts - Total number of products in the current category.
+             */
+            function updateLoadMoreButton(category, totalProducts) {
+                mainLoadMoreBtn.dataset.category = category;
+                if (displayedProductCounts[category] < totalProducts) {
+                    mainLoadMoreBtn.classList.remove('hidden');
+                } else {
+                    mainLoadMoreBtn.classList.add('hidden');
+                }
+            }
+
+            /**
+             * Shows the specified category and initializes its display.
+             * Hides all other categories.
+             * @param {string} categoryToShow - The category ID (e.g., 'new', 'men').
+             */
+            function showCategory(categoryToShow) {
+                activeCategory = categoryToShow;
+                productGrids.forEach(grid => {
+                    if (grid.id === `${categoryToShow}-products`) {
+                        grid.classList.remove('hidden');
+                        initializeCategoryDisplay(grid); // Initialize or re-initialize display
+                    } else {
+                        grid.classList.add('hidden');
+                    }
+                });
+                navbarSearchInput.value = ''; // Clear search input when changing category
+                filterProducts(''); // Reset search filter when changing categories
+            }
+
+            /**
+             * Sets the active class on the clicked category button.
+             * @param {HTMLElement} clickedButton - The category button that was clicked.
+             */
+            function setActiveButton(clickedButton) {
+                categoryButtons.forEach(button => {
+                    button.classList.remove('active-category');
+                });
+                clickedButton.classList.add('active-category');
+            }
+
+            /**
+             * Filters products within the active category based on a search term.
+             * Controls visibility of products and the "Load More" button.
+             * @param {string} searchTerm - The search term to filter by.
+             */
+            function filterProducts(searchTerm) {
+                const currentGrid = document.getElementById(`${activeCategory}-products`);
+                if (!currentGrid) return; // Should not happen if activeCategory is always valid
+
+                const cards = Array.from(currentGrid.querySelectorAll('.product-card'));
+                searchTerm = searchTerm.toLowerCase().trim(); // Trim whitespace from search term
+
+                let visibleCount = 0;
+                let foundMatch = false; // Flag to check if any product matches the search
+
+                cards.forEach(card => {
+                    const productName = card.querySelector('.product-name').textContent.toLowerCase();
+                    const productKeywords = card.dataset.keywords ? card.dataset.keywords.toLowerCase() : '';
+
+                    const matchesSearch = productName.includes(searchTerm) || productKeywords.includes(searchTerm);
+
+                    if (searchTerm.length > 0) { // Search is active
+                        if (matchesSearch) {
+                            card.style.display = 'block';
+                            visibleCount++;
+                            foundMatch = true; // Set flag if a match is found
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    } else { // No search term, revert to initial load/load more logic
+                        if (visibleCount < displayedProductCounts[activeCategory]) {
+                             card.style.display = 'block';
+                             visibleCount++;
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+
+                // Manage Load More button based on search state
+                if (searchTerm.length > 0) {
+                    mainLoadMoreBtn.classList.add('hidden'); // Hide load more during active search
+                } else {
+                    // Re-evaluate load more visibility based on initial/current counts
+                    const totalProductsInActiveCategory = cards.length;
+                    updateLoadMoreButton(activeCategory, totalProductsInActiveCategory);
+                }
+
+                // Scroll to collections section if a search term is active and matches are found
+                if (searchTerm.length > 0 && foundMatch && collectionsSection) {
+                    collectionsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+
+            // --- Event Listeners ---
+
+            // Category buttons click handler
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    showCategory(category);
+                    setActiveButton(this);
+                });
+            });
+
+            // Main "Load More" button click handler
+            mainLoadMoreBtn.addEventListener('click', function() {
+                const category = mainLoadMoreBtn.dataset.category;
+                const categoryGrid = document.getElementById(`${category}-products`);
+                if (!categoryGrid) return;
+
+                const cards = Array.from(categoryGrid.querySelectorAll('.product-card'));
+                let currentDisplayCount = displayedProductCounts[category];
+
+                let newDisplayCount = currentDisplayCount + productsPerLoad;
+
+                // Show the next batch of products
+                for (let i = currentDisplayCount; i < Math.min(newDisplayCount, cards.length); i++) {
+                    cards[i].style.display = 'block';
+                }
+                displayedProductCounts[category] = Math.min(newDisplayCount, cards.length);
+
+                // Hide button if all products are shown
+                updateLoadMoreButton(category, cards.length);
+            });
+
+            // Search bar toggle
+            searchIcon.addEventListener('click', function() {
+                navbarSearchContainer.classList.toggle('active');
+                if (navbarSearchContainer.classList.contains('active')) {
+                    navbarSearchInput.focus();
+                } else {
+                    navbarSearchInput.value = '';
+                    filterProducts(''); // Clear search and reset display when closed
+                }
+            });
+
+            // Search input keyup for filtering
+            navbarSearchInput.addEventListener('keyup', function() {
+                filterProducts(navbarSearchInput.value);
+            });
+
+            // Add to Cart functionality
+            let cartItemCount = 0;
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    cartItemCount++;
+                    const productName = this.closest('.product-card').querySelector('.product-name').textContent;
+                    console.log(`Added "${productName}" to cart.`);
+                    alert(`${productName} added to cart!`);
+                });
+            });
+
+            // --- Initial Setup on Page Load ---
+
+            // Initialize all categories (this populates displayedProductCounts)
+            productGrids.forEach(grid => {
+                // We're just populating displayedProductCounts here, not actually showing/hiding yet
+                // The actual showing/hiding is done by showCategory.
+                const category = grid.id.replace('-products', '');
+                const cards = Array.from(grid.querySelectorAll('.product-card'));
+                displayedProductCounts[category] = Math.min(cards.length, productsPerLoad);
+            });
+
+            // Set 'NEW' as the initial active category and display its products
+            const initialCategoryButton = document.querySelector('.category-btn[data-category="new"]');
+            if (initialCategoryButton) {
+                showCategory('new'); // This also calls initializeCategoryDisplay and updateLoadMoreButton
+                setActiveButton(initialCategoryButton);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natanem Couture | Ethiopian Luxury Fashion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Advent+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#c5a47e',
+                        burgundy: '#5c0d26',
+                        darkBurgundy: '#3d0819',
+                        lightGold: '#f5f0eA',
+                        lightBurgundy: '#8a2a47',
+                        darkGray: '#1a1a1a',
+                        cream: '#f8f5f0'
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Montserrat', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.7s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-down': 'slideDown 0.8s ease-out',
+                        'zoom-in': 'zoomIn 0.6s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        zoomIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            overflow-x: hidden;
+              font-family: 'Advent Pro', sans-serif !important;
+                /* font-family: 'Playfair Display', serif !important; */
+        }
+       
+                h1, h2, h3, h4, h5, h6 {
+                font-family: 'Advent Pro', sans-serif !important;
+                /* font-family: 'Playfair Display', serif !important; */
+                }
+
+        .luxury-border {
+            position: relative;
+        }
+        
+        .luxury-border::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c5a47e, transparent);
+        }
+        
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.8));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        
+        .product-card:hover::before {
+            opacity: 1;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .hero-pattern {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('Img/landing_image3.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .nav-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .category-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #c5a47e;
+            transition: width 0.3s ease;
+        }
+        
+        .category-btn:hover::after,
+        .category-btn.active-category::after {
+            width: 100%;
+        }
+        
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gold-gradient {
+            background: linear-gradient(135deg, #c5a47e 0%, #e4c9a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-element-delay {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+        
+        .floating-element-delay-2 {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 4s;
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c5a47e, transparent);
+            margin: 4rem auto;
+            width: 80%;
+        }
+        
+        .embellishment {
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.03;
+            z-index: 0;
+            color: #c5a47e;
+        }
+        
+      
+        @media (max-width: 768px) {
+            .hero-pattern {
+                background-attachment: scroll;
+            }
+            
+            .embellishment {
+                font-size: 4rem;
+            }
+        }
+    </style>
+        <style>
+        /* --- Base and Custom Styles --- */
+        html { scroll-behavior: smooth; }
+       
+        .no-scroll { overflow: hidden; }
+
+        .luxury-border { position: relative; }
+        .luxury-border::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background-color: #c5a47e;
+            transition: width 0.4s ease;
+        }
+        .luxury-border:hover::after { width: 100%; }
+
+        /* --- Hero Section with Video Background --- */
+        .hero-section { position: relative; overflow: hidden; }
+        #hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+        
+        /* --- Navigation Bar Styling --- */
+        #main-nav, #main-nav a, #main-nav button, #main-nav span { color: rgb(255, 255, 255); }
+        
+        .nav-scrolled {
+    background-color: rgba(0, 0, 0, 0.3); /* bg-black/30 */
+    backdrop-filter: blur(12px); /* backdrop-blur-md */
+    -webkit-backdrop-filter: blur(12px); /* for Safari */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+        .nav-scrolled a, .nav-scrolled button, .nav-scrolled span { color: #000000; }
+
+        .navbar-search-container {
+            display: flex;
+            align-items: center;
+            transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            width: 0;
+            
+            overflow: hidden;
+            opacity: 0;
+        }
+        .navbar-search-container.active { width: 100px; opacity: 1; }
+        
+        /* --- Mobile Menu --- */
+        #mobile-menu {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* General text and gradient styles */
+        .text-shadow { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+        .gold-gradient {
+            background: linear-gradient(135deg, #c5a47e 0%, #e4c9a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-cream font-sans overflow-x-hidden">
+   
+    <!-- Navigation -->
+    <nav id="main-nav" class="fixed top-0 left-0 w-full z-40 py-4 transition-all duration-500">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            
+            <!-- Left Side: Desktop Links -->
+            <div class="flex-1 flex justify-start">
+                <div class="hidden lg:flex items-center space-x-8">
+                        <div class="relative group">
+                        <a href="/index.html#our-collections-section"><button class="font-medium text-md hover:text-gold transition-all duration-300 relative luxury-border pb-1">
+                            OUR COLLECTION
+                        </button></a>
+                        <div class="dropdown-menu absolute hidden group-hover:block bg-black/30 backdrop-blur-md mt-2 py-2 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transform -translate-y-2 group-hover:translate-y-0">
+                            <a href="/index.html#our-collections-section" data-category-link="new" class="block px-6 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-gold">NEW</a>
+                            <a href="/index.html#our-collections-section" data-category-link="women" class="block px-6 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-gold">WOMEN</a>
+                            <a href="/index.html#our-collections-section" data-category-link="men" class="block px-6 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-gold">MEN</a>
+                            <a href="/index.html#our-collections-section" data-category-link="hats" class="block px-6 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-gold">HATS</a>
+                            </div>
+                            </div>
+                  
+                    <a href="/pages/ARTISAN_CRAFTSMANSHIP.html" class="  font-medium text-md hover:text-gold transition-all duration-300 relative luxury-border pb-1">ARTISAN</a>
+
+                     <a href="./publication.html" class="  font-medium text-md hover:text-gold transition-all duration-300 relative luxury-border pb-1">PUBLICATIONS</a>
+                
+                </div>
+            </div>
+
+            <!-- Center: Logo -->
+            <div class="flex-shrink-0">
+            <h1 class="  text-2xl md:text-4xl gold-gradient  tracking-widest text-shadow">ABOUT NATANEM COUTURE</h1>
+
+            </div>
+
+            <!-- Right Side: Desktop Links & Mobile Button -->
+            <div class="flex-1 flex justify-end  overflow-hidden">
+                <div class="hidden lg:flex items-center space-x-6">
+
+                   <a href="./Events.html" class="  font-medium text-md hover:text-gold transition-all duration-300 relative luxury-border pb-1">UPCOMING EVENTS</a>
+                    <a href="/pages/ABOUT.html" class="  font-medium text-md hover:text-gold transition-all duration-300 relative luxury-border pb-1">ABOUT US</a>
+
+                     <a href="/index.html#join-us" class="    font-medium text-md hover:text-gold transition-all duration-300 relative luxury-border pb-1">JOIN US</a>
+                     <span id="search-icon" class="cursor-pointer hover:text-gold transition-all duration-300">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+                     </span>
+                     <div id="navbar-search-container" class="navbar-search-container">
+                         <input type="text" id="navbar-search-input" class="bg-transparent border border-gray-300 text-white rounded px-4 py-1 focus:outline-none focus:ring-2 " placeholder="Search...">
+                     </div>
+                </div>
+                <div class="lg:hidden">
+                     <button class="mobile-menu-button hover:text-gold transition-all duration-300">
+                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                     </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu (Full Screen Overlay) -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-black/90 backdrop-blur-sm z-50 flex flex-col justify-center items-center space-y-8 text-white text-2xl   opacity-0 hidden">
+        <button id="close-menu-button" class="absolute top-6 right-6 text-4xl hover:text-gold transition-colors">&times;</button>
+       <a href="/index.html#our-collections-section" data-category-link="new" class="mobile-menu-link hover:text-gold transition-colors">NEW</a>
+<a href="/index.html#our-collections-section" data-category-link="women" class="mobile-menu-link hover:text-gold transition-colors">WOMEN</a>
+<a href="/index.html#our-collections-section" data-category-link="men" class="mobile-menu-link hover:text-gold transition-colors">MEN</a>
+<a href="/index.html#our-collections-section" data-category-link="hats" class="mobile-menu-link hover:text-gold transition-colors">HATS</a>
+<a href="/pages/ARTISAN_CRAFTSMANSHIP.html" class="mobile-menu-link hover:text-gold transition-colors">ARTISAN</a>
+<a href="/pages/publication.html" class="mobile-menu-link hover:text-gold transition-colors">PUBLICATIONS</a>
+<a href="/index.html#join-us" class="mobile-menu-link hover:text-gold transition-colors">JOIN US</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nav = document.getElementById('main-nav');
+            const searchIcon = document.getElementById('search-icon');
+            const searchContainer = document.getElementById('navbar-search-container');
+            const searchInput = document.getElementById('navbar-search-input');
+            
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMenuButton = document.getElementById('close-menu-button');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+            const body = document.body;
+
+            // --- Navbar scroll effect ---
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 5) {
+                    nav.classList.add('nav-scrolled');
+                } else {
+                    nav.classList.remove('nav-scrolled');
+                }
+            });
+
+            // --- Desktop Search icon toggle ---
+            searchIcon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                searchContainer.classList.toggle('active');
+                if (searchContainer.classList.contains('active')) searchInput.focus();
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!searchContainer.contains(e.target) && !searchIcon.contains(e.target)) {
+                    searchContainer.classList.remove('active');
+                }
+            });
+
+            // --- Mobile Menu Toggle Functionality ---
+            const toggleMenu = () => {
+                if (mobileMenu.classList.contains('hidden')) {
+                    body.classList.add('no-scroll');
+                    mobileMenu.classList.remove('hidden');
+                    setTimeout(() => mobileMenu.classList.remove('opacity-0'), 10);
+                } else {
+                    body.classList.remove('no-scroll');
+                    mobileMenu.classList.add('opacity-0');
+                    setTimeout(() => mobileMenu.classList.add('hidden'), 300);
+                }
+            };
+
+            mobileMenuButton.addEventListener('click', toggleMenu);
+            closeMenuButton.addEventListener('click', toggleMenu);
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+        });
+    </script>
+    <!-- About Section -->
+    <section id="about" class="py-10  relative overflow-hidden">
+        <div class="embellishment top-10 left-10">
+            <i class="fas fa-crown"></i>
+        </div>
+        <div class="embellishment bottom-10 right-10">
+            <i class="fas fa-palette"></i>
+        </div>
+        
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-24 scroll-reveal"> 
+            </div>
+
+            <div class="flex flex-col lg:flex-row items-center lg:items-start text-left scroll-reveal">
+                <div class="w-full lg:w-1/2 pr-0 lg:pr-12 mb-12 lg:mb-0 transform hover:scale-105 transition-transform duration-500">
+                    <div class="overflow-hidden rounded-lg shadow-2xl">
+                        <img src="../Img/about.jpg" alt="Natanem Wondwosen" class="w-full h-auto object-cover transition-transform duration-700 hover:scale-110">
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <p class="font-sans text-lg leading-relaxed mb-6 text-darkGray">Natanem Wondwosen is a young and enthusiastic Ethiopian designer who is making significant strides both within Ethiopia and on the international stage. Driven by her passion and creative mind, she has dedicated her time and effort to creating impactful designs. Her work reflects a commitment to innovation and a desire to showcase Ethiopian talent and artistry to a wider audience.</p>
+
+                    <p class="font-sans text-lg leading-relaxed mb-8 text-darkGray">Natanem aims to not only elevate the design landscape in Ethiopia but also to establish a strong presence globally. Her dedication to her craft and her enthusiastic approach are evident in the quality and originality of her creations, positioning her as a promising force in the design world.</p>
+                    
+                    <div class="flex space-x-4">
+                        <a href="../index.html#our-collections-section" class="bg-burgundy text-white px-6 py-3 font-serif hover:bg-darkBurgundy transition-all duration-300 transform hover:scale-105">
+                            VIEW COLLECTIONS
+                        </a>
+                        <a href="./publication.html" class="border border-burgundy text-burgundy px-6 py-3 font-serif hover:bg-burgundy hover:text-white transition-all duration-300 transform hover:scale-105">
+                            MEDIA FEATURES
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- Footer -->
+    <footer class="bg-gray-100 text-black py-16 px-6">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="md:col-span-2">
+                <h4 class="  text-2xl mb-6 gold-gradient">NATANEM COUTURE</h4>
+                <p class="font-sans text-gray-700 max-w-md">
+                    Ethiopian luxury fashion redefined through heritage craftsmanship and contemporary elegance.
+                </p>
+                <div class="flex space-x-6 mt-6">
+                    <a href="#" class="text-gray-700 hover:text-gold transition-colors duration-300 text-xl">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-700 hover:text-gold transition-colors duration-300 text-xl">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-700 hover:text-gold transition-colors duration-300 text-xl">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-700 hover:text-gold transition-colors duration-300 text-xl">
+                        <i class="fab fa-pinterest-p"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="  font-bold mb-6 text-lg">QUICK LINKS</h4>
+                <ul class="space-y-3">
+                    <li><a href="/index.html#our-collections-section" class="text-gray-700 text-sm hover:text-gold transition-colors duration-300 font-sans">Our Collections</a></li>
+                    <li><a href="/pages/ABOUT.html" class="text-gray-700 hover:text-gold text-sm transition-colors duration-300 font-sans">About Us</a></li>
+                    <li><a href="/pages/ARTISAN_CRAFTSMANSHIP.html" class="text-gray-700 text-sm hover:text-gold transition-colors duration-300 font-sans">Artisian Craftmenship</a></li>
+                    <li><a href="/pages/Events.html" class="text-gray-700 hover:text-gold text-sm transition-colors duration-300 font-sans">Events</a></li>
+
+                    <li><a href="/pages/publication.html" class="text-gray-700 hover:text-gold transition-colors duration-300 font-sans">Publications </a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="  font-bold mb-6 text-lg">CONTACT</h4>
+                <p class="text-gray-700 font-sans mb-2">Addis Ababa, Ethiopia</p>
+                <p class="text-gray-700 font-sans mb-2">client@natanemcouture.com</p>
+                <p class="text-gray-700 font-sans mb-2">+251 925 002 947</p>
+                <div class="mt-6">
+                    <h5 class="  text-gold-gradient font-bold text-lg  mb-2">Business Hours</h5>
+                    <p class="text-gray-700 font-sans text-sm">Mon - Fri: 9AM - 6PM</p>
+                    <p class="text-gray-700 font-sans text-sm">Sat: 10AM - 4PM</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-800 mt-16 pt-8 text-center">
+            <p class="font-sans text-gray-800 text-sm">© 2025 NATANEM COUTURE. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+</body>
+</html>

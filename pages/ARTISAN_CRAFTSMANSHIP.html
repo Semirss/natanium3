@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natanem Couture | Ethiopian Luxury Fashion</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Advent+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#c5a47e',
+                        burgundy: '#5c0d26',
+                        darkBurgundy: '#3d0819',
+                        lightGold: '#f5f0eA',
+                        lightBurgundy: '#8a2a47',
+                        darkGray: '#1a1a1a',
+                        cream: '#f8f5f0'
+                    },
+                    fontFamily: {
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Montserrat', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.7s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'slide-down': 'slideDown 0.8s ease-out',
+                        'zoom-in': 'zoomIn 0.6s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        zoomIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            overflow-x: hidden;
+              font-family: 'Advent Pro', sans-serif !important;
+                /* font-family: 'Playfair Display', serif !important; */
+        }
+       
+                h1, h2, h3, h4, h5, h6 {
+                font-family: 'Advent Pro', sans-serif !important;
+                /* font-family: 'Playfair Display', serif !important; */
+                }
+
+        .luxury-border {
+            position: relative;
+        }
+        
+        .luxury-border::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c5a47e, transparent);
+        }
+        
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.8));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 1;
+        }
+        
+        .product-card:hover::before {
+            opacity: 1;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .hero-pattern {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('Img/landing_image3.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .nav-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .category-btn {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #c5a47e;
+            transition: width 0.3s ease;
+        }
+        
+        .category-btn:hover::after,
+        .category-btn.active-category::after {
+            width: 100%;
+        }
+        
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .text-shadow {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gold-gradient {
+            background: linear-gradient(135deg, #c5a47e 0%, #e4c9a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-element-delay {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+        
+        .floating-element-delay-2 {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 4s;
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #c5a47e, transparent);
+            margin: 4rem auto;
+            width: 80%;
+        }
+        
+        .embellishment {
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.03;
+            z-index: 0;
+            color: #c5a47e;
+        }
+        
+      
+        @media (max-width: 768px) {
+            .hero-pattern {
+                background-attachment: scroll;
+            }
+            
+            .embellishment {
+                font-size: 4rem;
+            }
+        }
+    </style>
+        <style>
+        /* --- Base and Custom Styles --- */
+        html { scroll-behavior: smooth; }
+       
+        .no-scroll { overflow: hidden; }
+
+        .luxury-border { position: relative; }
+        .luxury-border::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1px;
+            background-color: #c5a47e;
+            transition: width 0.4s ease;
+        }
+        .luxury-border:hover::after { width: 100%; }
+
+        /* --- Hero Section with Video Background --- */
+        .hero-section { position: relative; overflow: hidden; }
+        #hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -2;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+        
+        /* --- Navigation Bar Styling --- */
+        #main-nav, #main-nav a, #main-nav button, #main-nav span { color: rgb(255, 255, 255); }
+        
+        .nav-scrolled {
+    background-color: rgba(0, 0, 0, 0.3); /* bg-black/30 */
+    backdrop-filter: blur(12px); /* backdrop-blur-md */
+    -webkit-backdrop-filter: blur(12px); /* for Safari */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+        .nav-scrolled a, .nav-scrolled button, .nav-scrolled span { color: #000000; }
+
+        .navbar-search-container {
+            display: flex;
+            align-items: center;
+            transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            width: 0;
+            
+            overflow: hidden;
+            opacity: 0;
+        }
+        .navbar-search-container.active { width: 100px; opacity: 1; }
+        
+        /* --- Mobile Menu --- */
+        #mobile-menu {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* General text and gradient styles */
+        .text-shadow { text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); }
+        .gold-gradient {
+            background: linear-gradient(135deg, #c5a47e 0%, #e4c9a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-cream font-sans overflow-x-hidden">
+   
+    <!-- Navigation -->
+    <nav id="main-nav" class="fixed top-0 left-0 w-full z-40 py-4 transition-all duration-500">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            
+            <!-- Left Side: Desktop Links -->
+            <div class="flex-1 flex justify-start">
+                <div class="hidden lg:flex items-center space-x-8">
+                        <div class="relative group">
+                        <a href="/index.html#our-collections-section"><button class="font-medium text-md hover:text-gold transition-all duration-300 relative luxury-border pb-1">
+                            OUR COLLECTION
+                        </button></a>
+                        <div class="dropdown-menu absolute hidden group-hover:block bg-black/30 backdrop-blur-md mt-2 py-2 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transform -translate-y-2 group-hover:translate-y-0">
+                            <a href="/index.html#our-collections-section" data-category-link="new" class="block px-6 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-gold">NEW</a>
+                            <a href="/index.html#our-collections-section" data-category-link="women" class="block px-6 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-gold">WOMEN</a>
+                            <a href="/index.html#our-collections-section" data-category-link="men" class="block px-6 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-gold">MEN</a>
+                            <a href="/index.html#our-collections-section" data-category-link="hats" class="block px-6 py-2 text-sm text-gray-300 hover:bg-white/5 hover:text-gold">HATS</a>
+                            </div>
+                            </div>
+                  
+                    <a href="/pages/ARTISAN_CRAFTSMANSHIP.html" class="  font-medium text-md hover:text-gold transition-all duration-300 relative luxury-border pb-1">ARTISAN</a>
+
+                     <a href="./publication.html" class="  font-medium text-md hover:text-gold transition-all duration-300 relative luxury-border pb-1">PUBLICATIONS</a>
+                
+                </div>
+            </div>
+
+            <!-- Center: Logo -->
+            <div class="flex-shrink-0">
+            <h1 class="  text-2xl md:text-4xl gold-gradient tracking-widest text-shadow">ARTISAN CRAFTSMANSHIP</h1>
+
+
+            </div>
+
+            <!-- Right Side: Desktop Links & Mobile Button -->
+            <div class="flex-1 flex justify-end  overflow-hidden">
+                <div class="hidden lg:flex items-center space-x-6">
+
+                   <a href="./Events.html" class="  font-medium text-md hover:text-gold transition-all duration-300 relative luxury-border pb-1">UPCOMING EVENTS</a>
+                    <a href="/pages/ABOUT.html" class="  font-medium text-md hover:text-gold transition-all duration-300 relative luxury-border pb-1">ABOUT US</a>
+
+                     <a href="/index.html#join-us" class="    font-medium text-md hover:text-gold transition-all duration-300 relative luxury-border pb-1">JOIN US</a>
+                     <span id="search-icon" class="cursor-pointer hover:text-gold transition-all duration-300">
+                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
+                     </span>
+                     <div id="navbar-search-container" class="navbar-search-container">
+                         <input type="text" id="navbar-search-input" class="bg-transparent border border-gray-300 text-white rounded px-4 py-1 focus:outline-none focus:ring-2 " placeholder="Search...">
+                     </div>
+                </div>
+                <div class="lg:hidden">
+                     <button class="mobile-menu-button hover:text-gold transition-all duration-300">
+                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                     </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu (Full Screen Overlay) -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-black/90 backdrop-blur-sm z-50 flex flex-col justify-center items-center space-y-8 text-white text-2xl   opacity-0 hidden">
+        <button id="close-menu-button" class="absolute top-6 right-6 text-4xl hover:text-gold transition-colors">&times;</button>
+       <a href="/index.html#our-collections-section" data-category-link="new" class="mobile-menu-link hover:text-gold transition-colors">NEW</a>
+<a href="/index.html#our-collections-section" data-category-link="women" class="mobile-menu-link hover:text-gold transition-colors">WOMEN</a>
+<a href="/index.html#our-collections-section" data-category-link="men" class="mobile-menu-link hover:text-gold transition-colors">MEN</a>
+<a href="/index.html#our-collections-section" data-category-link="hats" class="mobile-menu-link hover:text-gold transition-colors">HATS</a>
+<a href="/pages/ARTISAN_CRAFTSMANSHIP.html" class="mobile-menu-link hover:text-gold transition-colors">ARTISAN</a>
+<a href="/pages/publication.html" class="mobile-menu-link hover:text-gold transition-colors">PUBLICATIONS</a>
+<a href="/index.html#join-us" class="mobile-menu-link hover:text-gold transition-colors">JOIN US</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nav = document.getElementById('main-nav');
+            const searchIcon = document.getElementById('search-icon');
+            const searchContainer = document.getElementById('navbar-search-container');
+            const searchInput = document.getElementById('navbar-search-input');
+            
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMenuButton = document.getElementById('close-menu-button');
+            const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+            const body = document.body;
+
+            // --- Navbar scroll effect ---
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 5) {
+                    nav.classList.add('nav-scrolled');
+                } else {
+                    nav.classList.remove('nav-scrolled');
+                }
+            });
+
+            // --- Desktop Search icon toggle ---
+            searchIcon.addEventListener('click', (e) => {
+                e.stopPropagation();
+                searchContainer.classList.toggle('active');
+                if (searchContainer.classList.contains('active')) searchInput.focus();
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!searchContainer.contains(e.target) && !searchIcon.contains(e.target)) {
+                    searchContainer.classList.remove('active');
+                }
+            });
+
+            // --- Mobile Menu Toggle Functionality ---
+            const toggleMenu = () => {
+                if (mobileMenu.classList.contains('hidden')) {
+                    body.classList.add('no-scroll');
+                    mobileMenu.classList.remove('hidden');
+                    setTimeout(() => mobileMenu.classList.remove('opacity-0'), 10);
+                } else {
+                    body.classList.remove('no-scroll');
+                    mobileMenu.classList.add('opacity-0');
+                    setTimeout(() => mobileMenu.classList.add('hidden'), 300);
+                }
+            };
+
+            mobileMenuButton.addEventListener('click', toggleMenu);
+            closeMenuButton.addEventListener('click', toggleMenu);
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+        });
+    </script>
+    <!-- Artisan Craftsmanship Section -->
+    <section class="py-10 px-6 bg-cream relative overflow-hidden" id="artisan-craftsmanship">
+        <div class="embellishment top-10 right-20">
+            <i class="fas fa-paint-brush"></i>
+        </div>
+        
+        <div class="container mx-auto max-w-7xl">
+            <div class="text-center mb-16 scroll-reveal">
+            </div>
+            
+            <div class="flex flex-col lg:flex-row items-center gap-16 mb-16 scroll-reveal">
+                <div class="lg:w-1/2 grid grid-cols-2 gap-6">
+                    <div class="group relative overflow-hidden h-60 rounded-lg transform hover:scale-105 transition-transform duration-500">
+                        <img src="https://www.shutterstock.com/shutterstock/videos/1008687769/thumb/1.jpg" 
+                            alt="Ethiopian textile weaving" 
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <p class="text-white font-serif text-xl px-4 text-center">Handwoven Textiles</p>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden h-60 rounded-lg transform hover:scale-105 transition-transform duration-500">
+                        <img src="../Img/crafts2.jpg" 
+                            alt="Leather craftsmanship" 
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <p class="text-white font-serif text-xl px-4 text-center">Leather Craft</p>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden h-60 rounded-lg transform hover:scale-105 transition-transform duration-500">
+                        <img src="../Img/crafts3.jpg" 
+                            alt="Silver jewelry making" 
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <p class="text-white font-serif text-xl px-4 text-center">Silver Jewelry</p>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden h-60 rounded-lg transform hover:scale-105 transition-transform duration-500">
+                        <img src="../Img/crafts4.jpg" 
+                            alt="Embroidery detail" 
+                            class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <p class="text-white font-serif text-xl px-4 text-center">Embroidery Work</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 scroll-reveal">
+                    <h3 class="font-serif text-4xl mb-6 gold-gradient">CRAFTED IN ETHIOPIA</h3>
+                    <p class="font-sans mb-6 text-lg leading-relaxed text-darkGray">
+                        Every Natanem Couture piece is handcrafted by master artisans in Addis Ababa, 
+                        blending centuries-old techniques with contemporary luxury. Our atelier works with 
+                        Ethiopia's most skilled craftspeople to create wearable art.
+                    </p>
+                    <p class="font-sans mb-8 text-lg leading-relaxed text-darkGray">
+                        From hand-spun cotton to naturally dyed silks and ethically sourced leather, 
+                        each material tells a story of Ethiopian heritage while meeting the highest 
+                        standards of modern luxury fashion.
+                    </p>
+                    <a href="/index.html#our-collections-section" class="inline-block bg-burgundy text-white px-8 py-3 font-serif text-lg tracking-wider hover:bg-darkBurgundy transition-all duration-300 transform hover:scale-105">
+                        DISCOVER CRAFTSMANSHIP
+                    </a>
+                </div>
+            </div>
+            </section>
+    <!-- Footer -->
+    <footer class="bg-gray-100 text-black py-16 px-6">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="md:col-span-2">
+                <h4 class="  text-2xl mb-6 gold-gradient">NATANEM COUTURE</h4>
+                <p class="font-sans text-gray-700 max-w-md">
+                    Ethiopian luxury fashion redefined through heritage craftsmanship and contemporary elegance.
+                </p>
+                <div class="flex space-x-6 mt-6">
+                    <a href="#" class="text-gray-700 hover:text-gold transition-colors duration-300 text-xl">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-700 hover:text-gold transition-colors duration-300 text-xl">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-700 hover:text-gold transition-colors duration-300 text-xl">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-700 hover:text-gold transition-colors duration-300 text-xl">
+                        <i class="fab fa-pinterest-p"></i>
+                    </a>
+                </div>
+            </div>
+            <div>
+                <h4 class="  font-bold mb-6 text-lg">QUICK LINKS</h4>
+                <ul class="space-y-3">
+                    <li><a href="/index.html#our-collections-section" class="text-gray-700 text-sm hover:text-gold transition-colors duration-300 font-sans">Our Collections</a></li>
+                    <li><a href="/pages/ABOUT.html" class="text-gray-700 hover:text-gold text-sm transition-colors duration-300 font-sans">About Us</a></li>
+                    <li><a href="/pages/ARTISAN_CRAFTSMANSHIP.html" class="text-gray-700 text-sm hover:text-gold transition-colors duration-300 font-sans">Artisian Craftmenship</a></li>
+                    <li><a href="/pages/Events.html" class="text-gray-700 hover:text-gold text-sm transition-colors duration-300 font-sans">Events</a></li>
+
+                    <li><a href="/pages/publication.html" class="text-gray-700 hover:text-gold transition-colors duration-300 font-sans">Publications </a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="  font-bold mb-6 text-lg">CONTACT</h4>
+                <p class="text-gray-700 font-sans mb-2">Addis Ababa, Ethiopia</p>
+                <p class="text-gray-700 font-sans mb-2">client@natanemcouture.com</p>
+                <p class="text-gray-700 font-sans mb-2">+251 925 002 947</p>
+                <div class="mt-6">
+                    <h5 class="  text-gold-gradient font-bold text-lg  mb-2">Business Hours</h5>
+                    <p class="text-gray-700 font-sans text-sm">Mon - Fri: 9AM - 6PM</p>
+                    <p class="text-gray-700 font-sans text-sm">Sat: 10AM - 4PM</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-gray-800 mt-16 pt-8 text-center">
+            <p class="font-sans text-gray-800 text-sm">© 2025 NATANEM COUTURE. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Craftsmanship data
+        const craftsmanshipData = {
+            "techniques": [
+                {
+                    "id": 1,
+                    "title": "Traditional Weaving",
+                    "description": "Our weaving techniques date back centuries, using hand-operated looms that have been passed down through generations. Each piece takes between 2-4 weeks to complete, depending on the complexity of patterns and the quality of materials used. The intricate designs often tell stories of Ethiopian history, mythology, and daily life.",
+                    "images": [
+                        "https://images.unsplash.com/photo-1586023492125-27a2df6bd13f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "https://images.unsplash.com/photo-1586023492125-27a2df6bd13f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    ],
+                    "process": [
+                        "Hand-spinning natural cotton fibers",
+                        "Setting up traditional Ethiopian loom",
+                        "Weaving intricate patterns row by row",
+                        "Quality inspection and finishing"
+                    ],
+                    "time": "2-4 weeks per piece"
+                },
+                {
+                    "id": 2,
+                    "title": "Silver Smithing",
+                    "description": "Ethiopian silverwork is renowned for its intricate filigree and symbolic motifs. Our artisans use traditional tools and techniques to shape pure silver into exquisite jewelry pieces. Each item is individually crafted, ensuring no two pieces are exactly alike, embodying the uniqueness of Ethiopian artistic expression.",
+                    "images": [
+                        "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    ],
+                    "process": [
+                        "Melting and purifying silver",
+                        "Hand-hammering and shaping",
+                        "Creating intricate filigree patterns",
+                        "Polishing and quality control"
+                    ],
+                    "time": "1-3 weeks per piece"
+                },
+                {
+                    "id": 3,
+                    "title": "Natural Dyeing",
+                    "description": "We use only natural dyes sourced from Ethiopian plants, minerals, and insects. This sustainable approach not only creates vibrant, long-lasting colors but also honors our connection to the land. Each color has cultural significance, with recipes that have been carefully guarded and passed down through artisan families.",
+                    "images": [
+                        "https://images.unsplash.com/photo-1584467540263-0eb99c4e11fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "https://images.unsplash.com/photo-1586023492125-27a2df6bd13f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "https://images.unsplash.com/photo-1584467540263-0eb99c4e11fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    ],
+                    "process": [
+                        "Harvesting natural dye materials",
+                        "Preparing dye baths with traditional recipes",
+                        "Hand-dipping fabrics multiple times",
+                        "Sun-drying and fixing colors"
+                    ],
+                    "time": "3-5 days per batch"
+                },
+                {
+                    "id": 4,
+                    "title": "Embroidery Art",
+                    "description": "Our embroidery is more than decoration—it's narrative art. Using techniques that vary by region, our artisans create stunning visual stories with needle and thread. Each stitch is placed with intention, creating textures and patterns that reflect Ethiopia's diverse cultural heritage and contemporary creativity.",
+                    "images": [
+                        "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "https://images.unsplash.com/photo-1586023492125-27a2df6bd13f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                        "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                    ],
+                    "process": [
+                        "Designing patterns with cultural motifs",
+                        "Selecting thread colors and textures",
+                        "Hand-stitching intricate designs",
+                        "Final inspection and finishing touches"
+                    ],
+                    "time": "1-6 weeks depending on complexity"
+                }
+            ]
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Scroll reveal animation
+            const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+            
+            const scrollReveal = function() {
+                scrollRevealElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('revealed');
+                    }
+                });
+            };
+            
+            window.addEventListener('scroll', scrollReveal);
+            scrollReveal(); // Check on load
+
+            // Craftsmanship Modal Functionality
+            const craftsmanshipModal = document.getElementById('craftsmanshipModal');
+            const closeCraftsmanshipBtn = document.getElementById('closeCraftsmanship');
+            const craftsmanshipTitle = document.getElementById('craftsmanshipTitle');
+            const craftsmanshipDescription = document.getElementById('craftsmanshipDescription');
+            const craftsmanshipProcess = document.getElementById('craftsmanshipProcess');
+            const craftsmanshipTime = document.getElementById('craftsmanshipTime');
+            const craftsmanshipImages = document.getElementById('craftsmanshipImages');
+            const prevCraftsmanshipBtn = document.getElementById('prevCraftsmanship');
+            const nextCraftsmanshipBtn = document.getElementById('nextCraftsmanship');
+            
+            let currentTechniqueIndex = 0;
+            let currentImageIndex = 0;
+            
+            // Add click events to technique cards
+            const techniqueCards = document.querySelectorAll('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-4 > div');
+            techniqueCards.forEach((card, index) => {
+                card.addEventListener('click', function() {
+                    openCraftsmanshipModal(index);
+                });
+            });
+            
+            // Function to open craftsmanship modal
+            function openCraftsmanshipModal(techniqueIndex) {
+                const technique = craftsmanshipData.techniques[techniqueIndex];
+                if (!technique) return;
+                
+                currentTechniqueIndex = techniqueIndex;
+                currentImageIndex = 0;
+                
+                // Update modal content
+                craftsmanshipTitle.textContent = technique.title;
+                craftsmanshipDescription.textContent = technique.description;
+                craftsmanshipTime.textContent = technique.time;
+                
+                // Clear and update process steps
+                craftsmanshipProcess.innerHTML = '';
+                technique.process.forEach(step => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-start';
+                    li.innerHTML = `
+                        <i class="fas fa-check text-gold mr-3 mt-1"></i>
+                        <span>${step}</span>
+                    `;
+                    craftsmanshipProcess.appendChild(li);
+                });
+                
+                // Clear and update images
+                craftsmanshipImages.innerHTML = '';
+                technique.images.forEach((imageUrl, index) => {
+                    const imgDiv = document.createElement('div');
+                    imgDiv.className = 'min-w-full';
+                    imgDiv.innerHTML = `
+                        <img src="${imageUrl}" alt="${technique.title}" class="w-full h-96 object-cover rounded-lg">
+                    `;
+                    craftsmanshipImages.appendChild(imgDiv);
+                });
+                
+                // Update carousel position
+                updateCarouselPosition();
+                
+                // Show modal
+                craftsmanshipModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Function to update carousel position
+            function updateCarouselPosition() {
+                craftsmanshipImages.style.transform = `translateX(-${currentImageIndex * 100}%)`;
+            }
+            
+            // Previous image button
+            prevCraftsmanshipBtn.addEventListener('click', function() {
+                const technique = craftsmanshipData.techniques[currentTechniqueIndex];
+                currentImageIndex = (currentImageIndex - 1 + technique.images.length) % technique.images.length;
+                updateCarouselPosition();
+            });
+            
+            // Next image button
+            nextCraftsmanshipBtn.addEventListener('click', function() {
+                const technique = craftsmanshipData.techniques[currentTechniqueIndex];
+                currentImageIndex = (currentImageIndex + 1) % technique.images.length;
+                updateCarouselPosition();
+            });
+            
+            // Close modal handler
+            closeCraftsmanshipBtn.addEventListener('click', function() {
+                craftsmanshipModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close when clicking outside content
+            craftsmanshipModal.addEventListener('click', function(e) {
+                if (e.target === craftsmanshipModal) {
+                    craftsmanshipModal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
